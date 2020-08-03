@@ -10,11 +10,11 @@
          [infiniteScrollDistance]="scrollDistance"
          [infiniteScrollUpDistance]="scrollUpDistance"
          [infiniteScrollThrottle]="throttle"
-         (scrolled)="onScrollDown()"
+         (scrolled)="onScrollDown($event)"
          (scrolledUp)="onUp()">
 	<table class="table">
 		<tbody>
-			<tr *ngFor="let i of array | pagination : pager; let idx = index">
+			<tr *ngFor="let i of array ; let idx = index">
 				<th>{{ idx }}</th>
 				<td>{{ i.id}}</td>
 				<td>{{ i.userId }}</td>

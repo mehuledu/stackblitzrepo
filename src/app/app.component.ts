@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   pager: any = {};
   array = [];
   sum = 100;
-  throttle = 300;
+  throttle = 50;
   scrollDistance = 1;
   scrollUpDistance = 2;
   direction="";
