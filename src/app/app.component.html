@@ -1,0 +1,24 @@
+    <h1 class="title well">
+      {{ title }}
+      <section>
+        <small
+          >{{ array.length }}, items: {{ sum }}, now triggering scroll:{{
+            direction
+          }}</small
+        >
+        <small>https://plnkr.co/edit/e42nrO?preview</small>
+      </section>
+    </h1>
+    <div
+      class=".test"
+      data-infinite-scroll
+      [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance"
+      [infiniteScrollThrottle]="throttle"
+      (scrolled)="onScrollDown($event)"
+      (scrolledUp)="onUp($event)"
+    >
+      <p *ngFor="let i of array; let idx = index">
+        {{ i | json }}
+      </p>
+    </div>
