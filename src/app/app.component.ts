@@ -2,6 +2,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "./data.service";
 import { PagerService } from "./pager.service";
+import { defaultThrottleConfig } from "rxjs/internal-compatibility";
 
 @Component({
   selector: "my-app",
@@ -11,12 +12,11 @@ import { PagerService } from "./pager.service";
 export class AppComponent implements OnInit {
   pager: any = {};
   array = [];
-  pageSize = 100;
+  sum = 100;
   throttle = 300;
   scrollDistance = 1;
   scrollUpDistance = 2;
-  direction = "";
-  title = "Version 2";
+  direction="";
 
   constructor(
     private dataService: DataService,
@@ -29,11 +29,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-
   }
 
   addItems(startIndex, endIndex, _method) {
-    for (let i = 0; i < this.pageSize; ++i) {
+    for (let i = 0; i < this.sum; ++i) {
       this.array.push([i, " ", this.generateWord()].join(""));
       //this.array.slice(startIndex, endIndex);
     }
@@ -48,6 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   onScrollDown(ev) {
+    this.direction = "down";
     console.log("scrolled down!!", ev);
     this.getData();
     // add another 20 items
@@ -55,14 +55,14 @@ export class AppComponent implements OnInit {
     // this.sum += 20;
     // this.appendItems(start, this.sum);
 
-    this.direction = "down";
+    
   }
 
   onUp(ev) {
     console.log("scrolled up!", ev);
-    const start = this.pageSize;
-    this.pageSize += 20;
-    this.prependItems(start, this.pageSize);
+    const start = this.sum;
+    this.sum += 20;
+    this.prependItems(start, this.sum);
     this.direction = "up";
   }
 
@@ -76,8 +76,29 @@ export class AppComponent implements OnInit {
     this.dataService.get("posts").subscribe((response: any) => {
       this.array = this.array.concat(response);
       console.log("response", this.array.length);
+      switch (this.direction) {
+        case "up": {
+          this.pager = this.pagerService.getPager(
+            this.array.length,
+            this.pager.currentPage - 1
+          );
+          break;
+        }
+        case "down":
+          {
+            this.pager = this.pagerService.getPager(
+              this.array.length,
+              this.pager.currentPage + 1
+            );
+            break;
+          }
+          break;
+        default: {
+          this.pager = this.pagerService.getPager(this.array.length);
+          break;
+        }
+      }
 
-      this.pager = this.pagerService.getPager(this.array.length);
       console.log(this.pager);
     });
   }

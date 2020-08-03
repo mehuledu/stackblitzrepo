@@ -1,12 +1,17 @@
-<h1 class="title">
+<h1 *ngIf="false" class="title">
 	{{ title }}
 	<small>{{ array.length }}, items: {{ sum }}, now triggering scroll:{{ direction}}</small>
 	<!-- <small>https://plnkr.co/edit/e42nrO?preview</small>
 	<small>https://plnkr.co/edit/n7iqb2Ugv6tQv1DF2SX2?p=preview&preview</small> -->
 </h1>
-<div class=".test" data-infinite-scroll [infiniteScrollDistance]="scrollDistance"
-	[infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)"
-	(scrolledUp)="onUp($event)">
+<div class=".test" 
+         data-infinite-scroll
+         debounce
+         [infiniteScrollDistance]="scrollDistance"
+         [infiniteScrollUpDistance]="scrollUpDistance"
+         [infiniteScrollThrottle]="throttle"
+         (scrolled)="onScrollDown()"
+         (scrolledUp)="onUp()">
 	<table class="table">
 		<tbody>
 			<tr *ngFor="let i of array | pagination : pager; let idx = index">
@@ -17,5 +22,8 @@
 				<!-- <td>{{ i | json }}</td> -->
 			</tr>
 		</tbody>
+    <!-- <tbody>
+			<tr><td colspan="4">Call next</td></tr>
+    </tbody> -->
 	</table>
 </div>
