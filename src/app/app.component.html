@@ -1,25 +1,26 @@
-    <h1 class="title well">
-      {{ title }}
-      <section>
-        <small
+<h1 class="title well">
+	{{ title }}
+	<section>
+		<small
           >{{ array.length }}, items: {{ sum }}, now triggering scroll:{{
             direction
-          }}</small
-        >
-        <small>https://plnkr.co/edit/e42nrO?preview</small>
-        <small>https://plnkr.co/edit/n7iqb2Ugv6tQv1DF2SX2?p=preview&preview</small>
-      </section>
-    </h1>
-    <div
-      class=".test"
-      data-infinite-scroll
-      [infiniteScrollDistance]="scrollDistance"
-      [infiniteScrollUpDistance]="scrollUpDistance"
-      [infiniteScrollThrottle]="throttle"
-      (scrolled)="onScrollDown($event)"
-      (scrolledUp)="onUp($event)"
-    >
-      <p *ngFor="let i of array; let idx = index">
-        {{ i | json }}
-      </p>
-    </div>
+          }}</small>
+		<small>https://plnkr.co/edit/e42nrO?preview</small>
+		<small>https://plnkr.co/edit/n7iqb2Ugv6tQv1DF2SX2?p=preview&preview</small>
+	</section>
+</h1>
+<div class=".test" data-infinite-scroll [infiniteScrollDistance]="scrollDistance"
+	[infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)"
+	(scrolledUp)="onUp($event)">
+	<table class="table">
+		<tbody>
+			<tr *ngFor="let i of array; let idx = index">
+        <th>{{ idx }}</th>
+				<td>{{ i.id}}</td>
+        <td>{{ i.userId }}</td>
+        <td class="truncate">{{ i.title }}</td>
+        <!-- <td>{{ i | json }}</td> -->
+			</tr>
+		</tbody>
+	</table>
+</div>
