@@ -1,12 +1,16 @@
       .title {
-         top: 0;
+        position: fixed;
+        top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        color: green;
+        color: red;
         width: 100%;
       }
       .title small {
         color: #eaeaea;
       }
 
- 
+      .test {
+        height: 100px;
+        width: 100%;
+      }
