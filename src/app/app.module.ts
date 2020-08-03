@@ -9,12 +9,13 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { DataService } from "./data.service";
 import { HttpClientModule } from "@angular/common/http";
 import { PagerService } from "./pager.service";
+import { PaginationPipe } from './pagination.pipe';
 
 declare const chance;
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, InfiniteScrollModule],
-  declarations: [AppComponent, HelloComponent, ModalComponent],
+  declarations: [AppComponent, HelloComponent, ModalComponent, PaginationPipe],
   bootstrap: [AppComponent],
   providers: [DataService, PagerService]
 })
