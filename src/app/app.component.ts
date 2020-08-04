@@ -10,6 +10,7 @@ import { Pager } from "./Pager";
   templateUrl: `./app.component.html`
 })
 export class AppComponent implements OnInit {
+  limit: number = 1000;
   pager: Pager;
   array = [];
   sum = 100;
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
     //debugger
     //console.log(systemConfig);
   }
-
+  //hasMore = () => !this.array || this.array.length < this.limit;
   ngOnInit() {
     this.getData();
   }

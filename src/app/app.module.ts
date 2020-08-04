@@ -10,12 +10,13 @@ import { DataService } from "./data.service";
 import { HttpClientModule } from "@angular/common/http";
 import { PagerService } from "./pager.service";
 import { PaginationPipe } from './pagination.pipe';
+import { ScrollContainerComponent } from './scroll-container/scroll-container.component';
 
 declare const chance;
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, InfiniteScrollModule],
-  declarations: [AppComponent, HelloComponent, ModalComponent, PaginationPipe],
+  declarations: [AppComponent, HelloComponent, ModalComponent, PaginationPipe, ScrollContainerComponent],
   bootstrap: [AppComponent],
   providers: [DataService, PagerService]
 })
