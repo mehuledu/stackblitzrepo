@@ -3,20 +3,20 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "./data.service";
 import { PagerService } from "./pager.service";
 import { defaultThrottleConfig } from "rxjs/internal-compatibility";
-
+import { Pager } from "./Pager";
 @Component({
   selector: "my-app",
   styleUrls: [`/app.component.css`],
   templateUrl: `./app.component.html`
 })
 export class AppComponent implements OnInit {
-  pager: any = {};
+  pager: Pager;
   array = [];
   sum = 100;
   throttle = 50;
   scrollDistance = 1;
   scrollUpDistance = 2;
-  direction="";
+  direction = "";
 
   constructor(
     private dataService: DataService,
@@ -54,8 +54,6 @@ export class AppComponent implements OnInit {
     // const start = this.sum;
     // this.sum += 20;
     // this.appendItems(start, this.sum);
-
-    
   }
 
   onUp(ev) {
@@ -76,28 +74,29 @@ export class AppComponent implements OnInit {
     this.dataService.get("posts").subscribe((response: any) => {
       this.array = this.array.concat(response);
       console.log("response", this.array.length);
-      switch (this.direction) {
-        case "up": {
-          this.pager = this.pagerService.getPager(
-            this.array.length,
-            this.pager.currentPage - 1
-          );
-          break;
-        }
-        case "down":
-          {
-            this.pager = this.pagerService.getPager(
-              this.array.length,
-              this.pager.currentPage + 1
-            );
-            break;
-          }
-          break;
-        default: {
-          this.pager = this.pagerService.getPager(this.array.length);
-          break;
-        }
-      }
+      this.pager = this.pagerService.getPager(this.array.length);
+      // switch (this.direction) {
+      //   case "up": {
+      //     this.pager = this.pagerService.getPager(
+      //       this.array.length,
+      //       this.pager.currentPage - 1
+      //     );
+      //     break;
+      //   }
+      //   case "down":
+      //     {
+      //       this.pager = this.pagerService.getPager(
+      //         this.array.length,
+      //         this.pager.currentPage + 1
+      //       );
+      //       break;
+      //     }
+      //     break;
+      //   default: {
+      //     this.pager = this.pagerService.getPager(this.array.length);
+      //     break;
+      //   }
+      // }
 
       console.log(this.pager);
     });
