@@ -9,14 +9,9 @@
   https://www.algolia.com/doc/guides/building-search-ui/resources/ui-and-ux-patterns/in-depth/infinite-scroll/angular/
   -->
 </h1>
-<div class=".test" 
-         data-infinite-scroll
-         debounce
-         [infiniteScrollDistance]="scrollDistance"
-         [infiniteScrollUpDistance]="scrollUpDistance"
-         [infiniteScrollThrottle]="throttle"
-         (scrolled)="onScrollDown($event)"
-         (scrolledUp)="onUp()">
+<div class=".test" data-infinite-scroll debounce [infiniteScrollDistance]="scrollDistance"
+	[infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)"
+	(scrolledUp)="onUp()">
 	<table class="table">
 		<tbody>
 			<tr *ngFor="let i of array ; let idx = index">
@@ -27,7 +22,26 @@
 				<!-- <td>{{ i | json }}</td> -->
 			</tr>
 		</tbody>
-    <!-- <tbody>
+		<!-- <tbody>
+			<tr><td colspan="4">Call next</td></tr>
+    </tbody> -->
+	</table>
+</div>
+
+<div class=".test">
+	<div (onVisible)="onUp()">top</div>
+	<table class="table">
+		<tbody>
+			<tr *ngFor="let i of array ; let idx = index">
+				<th>{{ idx }}</th>
+				<td>{{ i.id}}</td>
+				<td>{{ i.userId }}</td>
+				<td class="truncate">{{ i.title }}</td>
+				<!-- <td>{{ i | json }}</td> -->
+			</tr>
+		</tbody>
+		<div (onVisible)="onScrollDown($event)">butom</div>
+		<!-- <tbody>
 			<tr><td colspan="4">Call next</td></tr>
     </tbody> -->
 	</table>
